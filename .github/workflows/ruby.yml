@@ -17,7 +17,7 @@ jobs:
   test:
     environment:
       name: reports
-      url: https://github-actions-logs.s3.amazonaws.com/${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html
+      url: "https://github-actions-logs.s3.amazonaws.com/${{GITHUB_WORKFLOW}}-${{GITHUB_ACTION}}-${{GITHUB_RUN_ID}}-${{GITHUB_RUN_NUMBER}}-report.html"
     runs-on: ubuntu-latest
 
     steps:
