@@ -30,21 +30,8 @@ jobs:
     - name: Install dependencies
       run: bundle install
     - name: Run tests
-      run: cucumber --format html > reports/report.html
-    - uses: actions/upload-artifact@v2
-      with:
-        name: cucucmber-report
-        path: reports/report.html
-  uploadlogs:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/download-artifact@v2
-      with:
-        name: cucumber-report
-        path: reports/report.html
-    - run: ls -ltr logs
+      run: cucumber --format html > reports/${{env.GITHUB_WORKFLOW}}-${{ env.GITHUB_ACTION }}-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_RUN_NUMBER }}-report.html
+    - run: ls -ltr reports
     - uses: jakejarvis/s3-sync-action@master
       env:
         AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
