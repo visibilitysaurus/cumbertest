@@ -43,9 +43,11 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: reports
-      url: ${{ needs.test.outputs.reporturl }}
+      url: https://github-actions-logs.s3.amazonaws.com/
+      #url: ${{ needs.test.outputs.reporturl }}
     needs: test  
     steps:
+    - run: echo "${{needs.test.outputs.reportur}}"
     - uses: actions/download-artifact@v2
       with:
         name: report
