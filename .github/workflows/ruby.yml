@@ -31,3 +31,5 @@ jobs:
       run: bundle install
     - name: Run tests
       run: cucumber --format html > reports/report.html
+    - name: Set report URL
+      run: echo "::set-output name=report_url::reports/report.html"
