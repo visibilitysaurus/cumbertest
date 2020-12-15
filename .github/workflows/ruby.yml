@@ -30,7 +30,7 @@ jobs:
     - name: Install dependencies
       run: bundle install
     - name: Run tests
-      run: cucumber --format html > reports/${{env.GITHUB_WORKFLOW}}-${{ env.GITHUB_ACTION }}-${{ env.GITHUB_RUN_ID }}-${{ env.GITHUB_RUN_NUMBER }}-report.html
+      run: cucumber --format html > "reports/${{ GITHUB_WORKFLOW }}-${{ GITHUB_ACTION }}-${{ GITHUB_RUN_ID }}-${{ GITHUB_RUN_NUMBER }}-report.html"
     - run: ls -ltr reports
     - uses: jakejarvis/s3-sync-action@master
       env:
