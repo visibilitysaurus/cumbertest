@@ -41,6 +41,9 @@ jobs:
       run: echo "::set-output name=url::https://github-actions-logs.s3.amazonaws.com/${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: reports
+      url: ${{ needs.test.outputs.reporturl }}
     needs: test  
     steps:
     - uses: actions/download-artifact@v2
@@ -56,6 +59,3 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'
         SOURCE_DIR: 'reports'      # optional: defaults to entire repository
-    environment:
-      name: reports
-      url: ${{ needs.test.outputs.reporturl }}
