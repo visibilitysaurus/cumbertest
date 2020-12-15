@@ -15,9 +15,6 @@ on:
 
 jobs:
   test:
-    environment:
-      name: reports
-      url: https://github-actions-logs.s3.amazonaws.com/${{env.GITHUB_WORKFLOW}}-${{env.GITHUB_ACTION}}-${{env.GITHUB_RUN_ID}}-${{env.GITHUB_RUN_NUMBER}}-report.html
     runs-on: ubuntu-latest
 
     steps:
@@ -43,3 +40,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'us-east-1'
         SOURCE_DIR: 'reports'      # optional: defaults to entire repository
+    environment:
+      name: reports
+      url: https://github-actions-logs.s3.amazonaws.com/${{env.GITHUB_WORKFLOW}}-${{env.GITHUB_ACTION}}-${{env.GITHUB_RUN_ID}}-${{env.GITHUB_RUN_NUMBER}}-report.html  
