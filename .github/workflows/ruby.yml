@@ -32,13 +32,21 @@ jobs:
     - name: Run tests
       run: cucumber --format html > "reports/${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
     - run: ls -ltr reports
+    - uses: actions/upload-artifact@v2
+      with:
+        name: report
+        path: reports/*-report.html
     - id: reporturl
       name: Set Report URL
-      run: echo "::set-output name=url::${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
+      run: echo "::set-output name=url::https://github-actions-logs.s3.amazonaws.com/${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
   publish:
     runs-on: ubuntu-latest
     needs: test  
     steps:
+    - uses: actions/download-artifact@v2
+      with:
+        name: report
+        path: reports/
     - uses: jakejarvis/s3-sync-action@master
       with: 
         args: --acl public-read
