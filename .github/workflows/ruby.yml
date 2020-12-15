@@ -15,7 +15,9 @@ on:
 
 jobs:
   test:
-
+    environment:
+      name: reports
+      url: https://github.com
     runs-on: ubuntu-latest
 
     steps:
