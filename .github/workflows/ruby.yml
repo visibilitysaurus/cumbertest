@@ -34,7 +34,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: cucucmber-report
-        path: reports/
+        path: reports/report.html
   uploadlogs:
     runs-on: ubuntu-latest
     needs: test
@@ -43,7 +43,7 @@ jobs:
     - uses: actions/download-artifact@v2
       with:
         name: cucumber-report
-        path: reports/
+        path: reports/report.html
     - run: ls -ltr logs
     - uses: jakejarvis/s3-sync-action@master
       env:
