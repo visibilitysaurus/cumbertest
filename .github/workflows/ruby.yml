@@ -16,7 +16,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
+    outputs:
+      reporturl: ${{ steps.reporturl.outputs.url }}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby
@@ -31,6 +32,13 @@ jobs:
     - name: Run tests
       run: cucumber --format html > "reports/${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
     - run: ls -ltr reports
+    - id: reporturl
+      name: Set Report URL
+      run: echo "::set-output name=url::${GITHUB_WORKFLOW}-${GITHUB_ACTION}-${GITHUB_RUN_ID}-${GITHUB_RUN_NUMBER}-report.html"
+  publish:
+    runs-on: ubuntu-latest
+    needs: test  
+    steps:
     - uses: jakejarvis/s3-sync-action@master
       with: 
         args: --acl public-read
@@ -42,4 +50,4 @@ jobs:
         SOURCE_DIR: 'reports'      # optional: defaults to entire repository
     environment:
       name: reports
-      url: https://github-actions-logs.s3.amazonaws.com/${{env.GITHUB_WORKFLOW}}-${{env.GITHUB_ACTION}}-${{env.GITHUB_RUN_ID}}-${{env.GITHUB_RUN_NUMBER}}-report.html  
+      url: ${{ needs.test.outputs.reporturl }}
