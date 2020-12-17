@@ -16,6 +16,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        test-file:
+          - features/another_test.feature
+          - features/is_it_friday_yet.feature
     outputs:
       reporturl: ${{ steps.reporturl.outputs.url }}
     steps:
@@ -30,7 +35,7 @@ jobs:
     - name: Install dependencies
       run: bundle install
     - name: Run tests
-      run: cucumber --format html > "reports/cucumber-test-report.html"
+      run: cucumber ${{ matrix['test-file'] }} --format html > "reports/cucumber-test-report.html"
     - name: Run tests with JSON output
       run: cucumber --format json > "reports/cucumber-report.json"
     - uses: deblockt/cucumber-report-annotations-action@v1.7
