@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: reports
-      url: https://github-actions-logs.s3.amazonaws.com/
+      url: https://github-actions-logs.s3.amazonaws.com/${{ env.GITHUB_WORKFLOW }}
       #url: ${{ needs.test.outputs.reporturl }}
     needs: test  
     steps:
