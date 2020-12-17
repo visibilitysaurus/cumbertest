@@ -38,7 +38,7 @@ jobs:
         path: reports/*-report.html
     - id: reporturl
       name: Set Report URL
-      run: echo "::set-output name=url::https://github-actions-logs.s3.amazonaws.com/cucumber-test-${GITHUB_RUN_NUMBER}-report.html"
+      run: echo "::set-output name=url::https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html"
   publish:
     runs-on: ubuntu-latest
     environment:
