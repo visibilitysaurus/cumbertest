@@ -9,9 +9,9 @@ name: Cucumber Test
 
 on:
   push:
-    branches: [ seed ]
+    branches: [ main ]
   pull_request:
-    branches: [ seed ]
+    branches: [ main ]
 
 jobs:
   test:
