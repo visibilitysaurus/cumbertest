@@ -17,11 +17,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        test-file:
-          - features/another_test.feature
-          - features/is_it_friday_yet.feature
     outputs:
       reporturl: ${{ steps.reporturl.outputs.url }}
     steps:
