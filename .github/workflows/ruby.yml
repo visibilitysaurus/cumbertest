@@ -42,7 +42,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: report
-        path: reports/*-report.html
+        path: reports/*-report.*
     - id: reporturl
       name: Set Report URL
       run: echo "::set-output name=url::https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html"
