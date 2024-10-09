@@ -45,7 +45,7 @@ jobs:
         path: reports/*-report.*
     - id: reporturl
       name: Set Report URL
-      run: echo "url=https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html" >> $GITHUB_OUTPUT
+      run: echo "url=https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html" >> "$GITHUB_OUTPUT"
   publish:
     runs-on: ubuntu-latest
     environment:
