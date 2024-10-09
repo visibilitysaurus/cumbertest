@@ -20,7 +20,7 @@ jobs:
     outputs:
       reporturl: ${{ steps.reporturl.outputs.url }}
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -39,7 +39,7 @@ jobs:
         access-token: ${{ secrets.GITHUB_TOKEN }}
         path: "reports/cucumber-report.json"
     - run: ls -ltr reports
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: report
         path: reports/*-report.*
@@ -54,7 +54,7 @@ jobs:
     needs: test  
     steps:
     - run: echo "${{needs.test.outputs.reportur}}"
-    - uses: actions/download-artifact@v3
+    - uses: actions/download-artifact@v4
       with:
         name: report
         path: reports/
