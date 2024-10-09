@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: reports
-      url: ${{needs.test.outputs.reportur}}
+      url: https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html
     needs: test  
     steps:
     - run: echo "${{needs.test.outputs.reportur}}"
