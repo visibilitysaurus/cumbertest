@@ -54,7 +54,7 @@ jobs:
     needs: test  
     steps:
     - run: echo "${{needs.test.outputs.reportur}}"
-    - uses: actions/download-artifact@v2
+    - uses: actions/download-artifact@v3
       with:
         name: report
         path: reports/
