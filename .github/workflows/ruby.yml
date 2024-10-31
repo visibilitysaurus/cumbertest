@@ -56,7 +56,7 @@ jobs:
     - env:
           REPORTURL: 
             ${{needs.test.outputs.reporturl}} 
-    - run: echo "$REPORTURL"
+      run: echo "$REPORTURL"
     - uses: actions/download-artifact@v4
       with:
         name: report
