@@ -46,14 +46,6 @@ jobs:
     - id: reporturl
       name: Set Report URL
       run: echo "url=https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html" >> "$GITHUB_OUTPUT"
-  outputtest:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - env:
-          OUTPUT1: 
-            ${{needs.test.outputs.reporturl}} 
-        run: echo "$OUTPUT1"
   publish:
     runs-on: ubuntu-latest
     environment:
@@ -61,7 +53,10 @@ jobs:
       url: https://github-actions-logs.s3.amazonaws.com/cucumber-test-report.html
     needs: test  
     steps:
-    - run: echo "${{needs.test.outputs.reportur}}"
+    - env:
+          REPORTURL: 
+            ${{needs.test.outputs.reporturl}} 
+    - run: echo "$REPORTURL"
     - uses: actions/download-artifact@v4
       with:
         name: report
